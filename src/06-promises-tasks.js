@@ -100,19 +100,15 @@ function getFastestPromise(array) {
  *
  */
 function chainPromises(promises, action) {
-  let result = Promise.resolve();
-  return promises.reduce((acc, promise) => {
-    return acc.then(prevResult =>
-      promise
-        .then(val => {
-          if (!prevResult) {
-            return val;
-          }
-          return action(prevResult, val);
-        })
-        .catch(() => prevResult),
-    );
-  }, result);
+  const result = Promise.resolve();
+  return promises.reduce((acc, promise) => acc.then((prevResult) => promise
+    .then((val) => {
+      if (!prevResult) {
+        return val;
+      }
+      return action(prevResult, val);
+    })
+    .catch(() => prevResult)), result);
 }
 
 module.exports = {
