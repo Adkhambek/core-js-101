@@ -523,7 +523,7 @@ function distinct(arr) {
  */
 function group(array, keySelector, valueSelector) {
   const map = new Map();
-  const cb = function (item) {
+  function cb(item) {
     const key = keySelector(item);
     const value = valueSelector(item);
     if (map.has(key)) {
@@ -531,7 +531,7 @@ function group(array, keySelector, valueSelector) {
     } else {
       map.set(key, [value]);
     }
-  };
+  }
   array.map(cb);
   return map;
 }
@@ -597,8 +597,6 @@ function swapHeadAndTail(arr) {
   const middle = arr.slice(Math.ceil((l - 1) / 2), Math.ceil(l / 2));
   return [...tail, ...middle, ...head];
 }
-
-console.log(swapHeadAndTail([1, 2, 3, 4, 5]));
 
 module.exports = {
   findElement,
